@@ -74,6 +74,7 @@ void app_main(void)
 
         }
         if(strstr((char*)data, "1") != 0){
+            pwm_mode(0);
             mode_count++;
             if(mode_count == 10){
                 mode_count = 0;
@@ -82,6 +83,7 @@ void app_main(void)
             }
         }
         else if(strstr((char*)data, "2") != 0){
+            pwm_mode(0);
             mode_count++;
             if(mode_count == 30){
                 mode_count = 0;
@@ -90,14 +92,17 @@ void app_main(void)
             }
         }
         else if(strstr((char*)data, "3") != 0){
+            toggle_mode(0);
             mode_3_value += 100;
             if(mode_3_value > 4095) mode_3_value = 0;
             pwm_mode(mode_3_value);
         }
         else if(strstr((char*)data, "ON") != 0){
+            pwm_mode(0);
             gpio_set_level(LED_PIN, 1);
         }
         else if(strstr((char*)data, "OFF") != 0){
+            pwm_mode(0);
             gpio_set_level(LED_PIN, 0);
         }
         vTaskDelay(50 / portTICK_PERIOD_MS);
